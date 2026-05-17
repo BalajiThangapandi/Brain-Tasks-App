@@ -1,91 +1,284 @@
-DevOps Practice Project – Dist Directory
 
-This repository contains the production-ready build files (dist folder) for DevOps practice and deployment exercises.
+git add README.md
 
-It is intentionally structured to help learners focus on CI/CD pipelines, hosting, containerization, and infrastructure setup rather than application development.
+git commit -m https://hub.docker.com/repository/docker/balajithangapandi/brain-tasks-app/general
 
-📁 What This Repository Contains
+git push
 
-dist/ – Compiled and production-ready static files
 
-HTML
+# Brain Tasks App - DevOps Deployment Project
 
-CSS
+## Project Overview
 
-JavaScript
+This project demonstrates DevOps implementation using:
 
-Assets (images, fonts, etc.)
+- Docker
+- DockerHub
+- AWS CLI
+- Kubernetes
+- Amazon EKS
+- AWS CodeBuild
+- AWS CodePipeline
+- CloudWatch
 
-These files are ready to deploy to:
+Application Repository:
+https://github.com/Vennilavanguvi/Brain-Tasks-App.git
 
-Web servers (Nginx / Apache)
+---
 
-Cloud platforms (AWS S3, Azure Blob, GCP Storage)
+# Step 1 - Clone Repository
 
-Containerized environments (Docker + Nginx)
+```bash
+git clone https://github.com/Vennilavanguvi/Brain-Tasks-App.git
+```
 
-Kubernetes clusters
+---
 
-CI/CD pipeline demonstrations
+# Step 2 - Dockerize Application
 
-🎯 Purpose of This Repository
+## Dockerfile
 
-This repository is designed for:
+```dockerfile
+FROM nginx:alpine
 
-DevOps beginners
+COPY dist/ /usr/share/nginx/html
 
-CI/CD practice
+EXPOSE 80
 
-Deployment pipeline testing
+CMD ["nginx", "-g", "daemon off;"]
+```
 
-Docker & Kubernetes deployment exercises
+---
 
-Web server configuration practice
+# Build Docker Image
 
-Reverse proxy and load balancer setup
+```bash
+docker build -t brain-tasks-app .
+```
 
-The goal is to simulate real-world deployment scenarios using already built application files.
+---
 
-❓ Why is there NO package.json?
+# Run Docker Container
 
-You may notice that this repository does not include:
+```bash
+docker run -d -p 3000:80 --name brain-container brain-tasks-app
+```
 
-package.json
+Application URL:
 
-node_modules
+```text
+http://localhost:3000
+```
 
-Source code (src/)
+---
 
-Build tools configuration
+# Step 3 - DockerHub Repository
 
-✅ Reason:
+DockerHub Link:
 
-This repository only contains the final production build output (dist), not the development source code.
+https://hub.docker.com/r/balajithangapandi/brain-tasks-app
 
-In a typical project:
+---
 
-Developers write source code.
+# Push Docker Image
 
-The project is built using tools like:
+```bash
+docker login
 
-Node.js
+docker tag brain-tasks-app balajithangapandi/brain-tasks-app:latest
 
-Webpack
+docker push balajithangapandi/brain-tasks-app:latest
+```
 
-Vite
+---
 
-React (or other frameworks)
+# Step 4 - AWS CLI Configuration
 
-A dist/ folder is generated.
+```bash
+aws configure
+```
 
-Only the production build is deployed to servers.
+Verify AWS:
 
-This repository represents step 4 only.
+```bash
+aws sts get-caller-identity
+```
 
-Since this is already the compiled output:
+---
 
-No dependencies are required
+# Step 5 - Kubernetes Tools
 
-No build process is required
+Installed:
+- kubectl
+- eksctl
 
-No package.json is needed
+Verify kubectl:
+
+```bash
+kubectl version --client
+```
+
+Verify eksctl:
+
+```bash
+eksctl version
+```
+
+---
+
+# Step 6 - EKS Cluster Creation
+
+```bash
+eksctl create cluster \
+--name brain-cluster \
+--region ap-south-1 \
+--nodegroup-name linux-nodes \
+--node-type t3.micro \
+--nodes 1
+```
+
+---
+
+# Step 7 - Kubernetes YAML Files
+
+## deployment.yaml
+
+Creates Kubernetes deployment for application pods.
+
+## service.yaml
+
+Creates LoadBalancer service for application access.
+
+Apply Commands:
+
+```bash
+kubectl apply -f deployment.yaml
+
+kubectl apply -f service.yaml
+```
+
+---
+
+# Step 8 - AWS CodeBuild
+
+Created buildspec.yml for automated build process.
+
+---
+
+# Step 9 - AWS CodePipeline
+
+Pipeline Flow:
+
+GitHub → CodeBuild → Docker Build → EKS Deployment
+
+---
+
+# Step 10 - Monitoring
+
+CloudWatch Logs used for:
+- Build monitoring
+- Deployment monitoring
+- Application logs
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
