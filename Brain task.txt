@@ -1,0 +1,7 @@
+The project was reworked to include AWS CodeBuild, AWS CodePipeline, and CloudWatch monitoring integration as requested during evaluation feedback.
+
+The application Docker image build process was successfully implemented using AWS CodeBuild with a custom buildspec.yml configuration. Build execution logs and Docker image build logs were successfully generated and monitored through AWS CloudWatch Logs.
+
+AWS CodePipeline was configured with GitHub source integration and AWS CodeBuild integration to demonstrate the CI/CD workflow. Kubernetes deployment.yaml and service.yaml files were included for EKS deployment configuration.
+
+All required screenshots, logs, monitoring evidence, CI/CD pipeline configurations, Docker build outputs, and cloud-native deployment artifacts were attached for re-evaluation.
